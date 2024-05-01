@@ -37,7 +37,7 @@ class _CircularRotationBodyState extends State<CircularRotationBody> {
           ),
         ),
         ValueListenableBuilder(
-          builder: (_, bool value, __) => (value) ? const _CircleWidgets() : Container(),
+          builder: (_, bool value, __) => (value) ? const _CircleWidgets() : const SizedBox(),
           valueListenable: isCirclesDrawn,
         )
       ],
@@ -52,7 +52,7 @@ class _CircularRotationBodyState extends State<CircularRotationBody> {
   }
 
   void _setSchedulerForCircleDrawn() {
-    WidgetsBinding.instance?.addPostFrameCallback(
+    WidgetsBinding.instance.addPostFrameCallback(
       (_) {
         const _CircleWidgets();
         isCirclesDrawn.value = true;
@@ -62,13 +62,22 @@ class _CircularRotationBodyState extends State<CircularRotationBody> {
   }
 }
 
-class _CircleWidgets extends StatelessWidget {
+class _CircleWidgets extends StatefulWidget {
   const _CircleWidgets({Key? key}) : super(key: key);
 
   @override
+  State<_CircleWidgets> createState() => _CircleWidgetsState();
+}
+
+class _CircleWidgetsState extends State<_CircleWidgets> with AutomaticKeepAliveClientMixin {
+  @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
-    return Stack(
-      children: const [
+    super.build(context);
+    return const Stack(
+      children: [
         CircleWidgetsFirst(),
         CircleWidgetsSecond(),
         CircleWidgetsThird(),

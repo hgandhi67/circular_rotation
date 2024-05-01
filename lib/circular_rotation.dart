@@ -37,7 +37,7 @@ part 'widgets/circular_rotation_body.dart';
 
 part 'widgets/tween_builder_widget.dart';
 
-class CircularRotation extends StatelessWidget {
+class CircularRotation extends StatefulWidget {
   /// You have to set property for the Circular Rotation.
   /// You can configure as per your requirements.
   final CircularRotationModel circularRotationProperty;
@@ -65,18 +65,27 @@ class CircularRotation extends StatelessWidget {
     controllerUserAction.add(CircleAnimationStatus.startStop);
   }
 
+  @override
+  State<CircularRotation> createState() => _CircularRotationState();
+}
+
+class _CircularRotationState extends State<CircularRotation> with AutomaticKeepAliveClientMixin {
   /// Refresh/Update circle animation.
   void _updateCircleAnimationsWidget() {
     controllerUserAction.add(CircleAnimationStatus.refreshScreen);
   }
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return LayoutBuilder(
       builder: (_, __) {
         _updateCircleAnimationsWidget();
         return CircularRotationInheritedModel(
-          circularRotationModel: circularRotationProperty,
+          circularRotationModel: widget.circularRotationProperty,
           child: const CircularRotationBody(),
         );
       },

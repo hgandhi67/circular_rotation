@@ -109,7 +109,7 @@ class _CircleWidgetsSecondState extends State<CircleWidgetsSecond> {
       _circularRotationModel.defaultCircleAnimationDuration;
 
   void _setSchedulerBinding() {
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       for (var element in _circleWidgets) {
         _circleWidgetsSize.add(element.calculateWidgetHalfSize());
       }

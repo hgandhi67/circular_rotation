@@ -69,7 +69,7 @@ class _CircleWidgetCenterState extends State<CircleWidgetCenter> {
           : 0);
 
   void _setSchedulerBinding() {
-    SchedulerBinding.instance?.addPostFrameCallback((timeStamp) {
+    SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       for (var element in _circleWidgets) {
         _circleWidgetsSize.add(element.calculateWidgetHalfSize());
       }
